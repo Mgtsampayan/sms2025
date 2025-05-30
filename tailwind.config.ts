@@ -6,7 +6,6 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {
@@ -15,20 +14,21 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        // Theme-aware colors using CSS variables
+        'bg-primary': 'var(--bg-primary)',
+        'bg-secondary': 'var(--bg-secondary)',
+        'bg-card': 'var(--bg-card)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'border-color': 'var(--border-color)',
+        
+        // Your existing brand colors
         lamaSky: "#C3EBFA",
         lamaSkyLight: "#EDF9FD",
         lamaPurple: "#CFCEFF",
         lamaPurpleLight: "#F1F0FF",
         lamaYellow: "#FAE27C",
         lamaYellowLight: "#FEFCE8",
-        // Dark mode colors
-        dark: {
-          bg: "#121212",
-          card: "#1E1E1E",
-          border: "#2A2A2A",
-          text: "#E0E0E0",
-          accent: "#3B82F6",
-        },
       },
     },
   },

@@ -23,7 +23,7 @@ export default function DashboardLayout({
         >
           <Image src="/logo.png" alt="logo" width={32} height={32} />
           <span className="hidden lg:block font-bold dark:text-white">
-            SchooLama
+            School University
           </span>
         </Link>
         <Menu />

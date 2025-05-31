@@ -14,29 +14,11 @@ type Class = {
 };
 
 const columns = [
-  {
-    header: "Class Name",
-    accessor: "name",
-  },
-  {
-    header: "Capacity",
-    accessor: "capacity",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Grade",
-    accessor: "grade",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Supervisor",
-    accessor: "supervisor",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
+  { header: "Class Name", accessor: "name" },
+  { header: "Capacity", accessor: "capacity", className: "hidden md:table-cell" },
+  { header: "Grade", accessor: "grade", className: "hidden md:table-cell" },
+  { header: "Supervisor", accessor: "supervisor", className: "hidden md:table-cell" },
+  { header: "Actions", accessor: "action" },
 ];
 
 const ClassListPage = () => {
@@ -54,16 +36,10 @@ const ClassListPage = () => {
         dark:text-text-primary
       "
     >
-      <td className="flex items-center gap-4 p-4">{item.name}</td>
-      <td className="hidden md:table-cell dark:text-text-primary">
-        {item.capacity}
-      </td>
-      <td className="hidden md:table-cell dark:text-text-primary">
-        {item.grade}
-      </td>
-      <td className="hidden md:table-cell dark:text-text-primary">
-        {item.supervisor}
-      </td>
+      <td className="p-4">{item.name}</td>
+      <td className="hidden md:table-cell">{item.capacity}</td>
+      <td className="hidden md:table-cell">{item.grade}</td>
+      <td className="hidden md:table-cell">{item.supervisor}</td>
       <td>
         <div className="flex items-center gap-2">
           {role === "admin" && (
@@ -79,9 +55,8 @@ const ClassListPage = () => {
 
   return (
     <div className="bg-bg-card dark:bg-dark-card p-4 rounded-md flex-1 m-4 mt-0">
-      {/* TOP */}
-      <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold dark:text-text-primary">
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-lg font-semibold dark:text-dark-text hidden md:block">
           All Classes
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
@@ -97,9 +72,8 @@ const ClassListPage = () => {
           </div>
         </div>
       </div>
-      {/* LIST */}
+
       <Table columns={columns} renderRow={renderRow} data={classesData} />
-      {/* PAGINATION */}
       <Pagination />
     </div>
   );

@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",  // <--- Add this line
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -21,7 +22,7 @@ const config: Config = {
         'text-primary': 'var(--text-primary)',
         'text-secondary': 'var(--text-secondary)',
         'border-color': 'var(--border-color)',
-        
+
         // Your existing brand colors
         lamaSky: "#C3EBFA",
         lamaSkyLight: "#EDF9FD",

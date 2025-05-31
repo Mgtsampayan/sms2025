@@ -1,23 +1,32 @@
 "use client";
 
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme, isLoading } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  if (isLoading) {
+  // When mounted on client, now we can show the UI
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
     return (
       <div className="w-8 h-8 bg-bg-card border border-border-color rounded-full animate-pulse" />
     );
   }
 
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <button
-      onClick={toggleTheme}
+      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
       className="w-8 h-8 flex items-center justify-center rounded-full bg-bg-card border border-border-color hover:bg-bg-secondary transition-all duration-200 hover:scale-105"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      aria-label={`Switch to ${
+        currentTheme === "light" ? "dark" : "light"
+      } mode`}
     >
-      {theme === "light" ? (
+      {currentTheme === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

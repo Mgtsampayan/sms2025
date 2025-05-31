@@ -3,7 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  
+
   /* Light theme colors */
   --bg-primary: #ffffff;
   --bg-secondary: #f7f8fa;
@@ -14,10 +14,10 @@
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="dark"] {
+.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
-  
+
   /* Dark theme colors */
   --bg-primary: #121212;
   --bg-secondary: #1a1a1a;
@@ -33,7 +33,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
+
   /* CSS variable colors for Tailwind */
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
@@ -41,18 +41,19 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-border-color: var(--border-color);
-  
+
   /* Brand colors */
-  --color-lamaSky: #C3EBFA;
-  --color-lamaSkyLight: #EDF9FD;
-  --color-lamaPurple: #CFCEFF;
-  --color-lamaPurpleLight: #F1F0FF;
-  --color-lamaYellow: #FAE27C;
-  --color-lamaYellowLight: #FEFCE8;
+  --color-lamaSky: #c3ebfa;
+  --color-lamaSkyLight: #edf9fd;
+  --color-lamaPurple: #cfceff;
+  --color-lamaPurpleLight: #f1f0ff;
+  --color-lamaYellow: #fae27c;
+  --color-lamaYellowLight: #fefce8;
 }
 
 * {
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 body {

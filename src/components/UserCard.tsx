@@ -9,8 +9,12 @@ const UserCard = ({ type }: { type: string }) => {
         </span>
         <Image src="/more.png" alt="" width={20} height={20} />
       </div>
-      <h1 className="text-2xl font-semibold my-4 text-gray-800 dark:text-dark-text">1,234</h1>
-      <h2 className="capitalize text-sm font-medium text-gray-700 dark:text-gray-300">{type}s</h2>
+      <h1 className="text-2xl font-semibold my-4 text-gray-800 dark:text-gray-300">
+        1,234
+      </h1>
+      <h2 className="capitalize text-sm font-medium text-gray-700 dark:text-gray-300">
+        {type}s
+      </h2>
     </div>
   );
 };

@@ -1,47 +1,112 @@
 const Announcements = () => {
+  const announcements = [
+    {
+      id: 1,
+      title: "Important Update for Students",
+      date: "2025-01-01",
+      description: "Please submit your assignments before the deadline.",
+      bgLight: "bg-lamaSkyLight",
+      bgDark: "dark:bg-green-900",
+      textLight: "text-green-900",
+      textDark: "dark:text-green-300",
+      dateBgLight: "bg-white",
+      dateBgDark: "dark:bg-green-800",
+      dateTextLight: "text-gray-400",
+      dateTextDark: "dark:text-green-200",
+    },
+    {
+      id: 2,
+      title: "Teacher's Meeting",
+      date: "2025-01-15",
+      description: "All teachers must attend the quarterly meeting.",
+      bgLight: "bg-lamaPurpleLight",
+      bgDark: "dark:bg-violet-900",
+      textLight: "text-violet-900",
+      textDark: "dark:text-violet-300",
+      dateBgLight: "bg-white",
+      dateBgDark: "dark:bg-violet-800",
+      dateTextLight: "text-gray-400",
+      dateTextDark: "dark:text-violet-200",
+    },
+    {
+      id: 3,
+      title: "Parent-Teacher Conference",
+      date: "2025-02-01",
+      description: "Conference scheduled for next month.",
+      bgLight: "bg-lamaYellowLight",
+      bgDark: "dark:bg-yellow-900",
+      textLight: "text-yellow-900",
+      textDark: "dark:text-yellow-300",
+      dateBgLight: "bg-white",
+      dateBgDark: "dark:bg-yellow-800",
+      dateTextLight: "text-gray-400",
+      dateTextDark: "dark:text-yellow-200",
+    },
+    {
+      id: 4,
+      title: "Staff Training Session",
+      date: "2025-02-10",
+      description: "Mandatory training for all staff members.",
+      bgLight: "bg-blue-100",
+      bgDark: "dark:bg-blue-900",
+      textLight: "text-blue-900",
+      textDark: "dark:text-blue-300",
+      dateBgLight: "bg-white",
+      dateBgDark: "dark:bg-blue-800",
+      dateTextLight: "text-gray-400",
+      dateTextDark: "dark:text-blue-200",
+    },
+  ];
+
   return (
-    <div className="bg-white dark:bg-dark-card p-4 rounded-md">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold dark:text-dark-text">Announcements</h1>
-        <span className="text-xs text-gray-400 dark:text-gray-500">View All</span>
+    <div className="bg-white dark:bg-dark-card p-6 rounded-lg shadow-sm transition-colors duration-300">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Announcements
+        </h1>
+        <span className="text-sm text-gray-500 dark:text-gray-400 cursor-pointer hover:underline">
+          View All
+        </span>
       </div>
-      <div className="flex flex-col gap-4 mt-4">
-        <div className="bg-lamaSkyLight dark:bg-gray-800 rounded-md p-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-medium dark:text-dark-text">Lorem ipsum dolor sit</h2>
-            <span className="text-xs text-gray-400 bg-white dark:bg-gray-700 dark:text-gray-300 rounded-md px-1 py-1">
-              2025-01-01
-            </span>
-          </div>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-            expedita. Rerum, quidem facilis?
-          </p>
-        </div>
-        <div className="bg-lamaPurpleLight dark:bg-gray-800 rounded-md p-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-medium dark:text-dark-text">Lorem ipsum dolor sit</h2>
-            <span className="text-xs text-gray-400 bg-white dark:bg-gray-700 dark:text-gray-300 rounded-md px-1 py-1">
-              2025-01-01
-            </span>
-          </div>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-            expedita. Rerum, quidem facilis?
-          </p>
-        </div>
-        <div className="bg-lamaYellowLight dark:bg-gray-800 rounded-md p-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-medium dark:text-dark-text">Lorem ipsum dolor sit</h2>
-            <span className="text-xs text-gray-400 bg-white dark:bg-gray-700 dark:text-gray-300 rounded-md px-1 py-1">
-              2025-01-01
-            </span>
-          </div>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-            expedita. Rerum, quidem facilis?
-          </p>
-        </div>
+
+      <div className="flex flex-col gap-5">
+        {announcements.map(
+          ({
+            id,
+            title,
+            date,
+            description,
+            bgLight,
+            bgDark,
+            textLight,
+            textDark,
+            dateBgLight,
+            dateBgDark,
+            dateTextLight,
+            dateTextDark,
+          }) => (
+            <div
+              key={id}
+              className={`${bgLight} ${bgDark} p-5 rounded-md shadow-sm transition-colors duration-300`}
+            >
+              <div className="flex justify-between items-center mb-2">
+                <h2
+                  className={`text-lg font-semibold ${textLight} ${textDark}`}
+                >
+                  {title}
+                </h2>
+                <span
+                  className={`text-xs rounded px-2 py-1 font-mono ${dateBgLight} ${dateBgDark} ${dateTextLight} ${dateTextDark}`}
+                >
+                  {date}
+                </span>
+              </div>
+              <p className={`text-sm ${textLight} ${textDark} opacity-90`}>
+                {description}
+              </p>
+            </div>
+          )
+        )}
       </div>
     </div>
   );

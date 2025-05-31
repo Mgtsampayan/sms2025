@@ -31,9 +31,9 @@ const config: Config = {
         lamaYellow: "#FAE27C",
         lamaYellowLight: "#FEFCE8",
         // Dark variants for brand colors
-        lamaSkyDark: "#134A60",      // Darker blue
-        lamaPurpleDark: "#4C4B7A",   // Darker purple
-        lamaYellowDark: "#7A7110",   // Darker yellow
+        lamaSkyDark: "#134A60",
+        lamaPurpleDark: "#4C4B7A",
+        lamaYellowDark: "#7A7110",
       },
     },
   },

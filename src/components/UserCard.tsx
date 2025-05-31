@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const typeColors = {
   student: {
-    lightBg: "bg-green-50", // very light green
-    darkBg: "bg-green-900", // dark green
+    lightBg: "bg-green-50",
+    darkBg: "bg-green-900",
     borderLight: "border-green-200",
     borderDark: "border-green-700",
     textLight: "text-green-900",

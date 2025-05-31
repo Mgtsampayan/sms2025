@@ -1,48 +1,23 @@
 @import "tailwindcss";
 
+/* ========= THEME VARIABLES ========= */
+
+/* Light Theme */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 
-  /* Light theme colors */
   --bg-primary: #ffffff;
   --bg-secondary: #f7f8fa;
   --bg-card: #ffffff;
+
   --text-primary: #171717;
   --text-secondary: #6b7280;
+
   --border-color: #e5e7eb;
   --shadow-color: rgba(0, 0, 0, 0.1);
-}
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-
-  /* Dark theme colors */
-  --bg-primary: #121212;
-  --bg-secondary: #1a1a1a;
-  --bg-card: #1e1e1e;
-  --text-primary: #e0e0e0;
-  --text-secondary: #9ca3af;
-  --border-color: #2a2a2a;
-  --shadow-color: rgba(255, 255, 255, 0.1);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
-  /* CSS variable colors for Tailwind */
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-bg-card: var(--bg-card);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-border-color: var(--border-color);
-
-  /* Brand colors */
+  /* Brand Colors (light by default) */
   --color-lamaSky: #c3ebfa;
   --color-lamaSkyLight: #edf9fd;
   --color-lamaPurple: #cfceff;
@@ -50,6 +25,48 @@
   --color-lamaYellow: #fae27c;
   --color-lamaYellowLight: #fefce8;
 }
+
+/* Dark Theme Overrides */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1e1e1e;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #9ca3af;
+
+  --border-color: #2a2a2a;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+
+  /* Dark Brand Color overrides (optional) */
+  --color-lamaSky: #134a60;
+  --color-lamaPurple: #4c4b7a;
+  --color-lamaYellow: #7a7110;
+}
+
+/* ========= TAILWIND DESIGN TOKENS ========= */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  --color-border-color: var(--border-color);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ========= BASE STYLES ========= */
 
 * {
   transition: background-color 0.2s ease, color 0.2s ease,
@@ -59,10 +76,11 @@
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, sans-serif;
 }
 
-/* Scrollbar styling for dark mode */
+/* ========= SCROLLBAR STYLE ========= */
+
 ::-webkit-scrollbar {
   width: 8px;
 }

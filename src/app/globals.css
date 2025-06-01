@@ -24,6 +24,9 @@
   --color-lamaPurpleLight: #f1f0ff;
   --color-lamaYellow: #fae27c;
   --color-lamaYellowLight: #fefce8;
+  --performance-group-a-fill: #C3EBFA;
+  --performance-group-b-fill: #FAE27C;
+  --performance-pie-fill: #8884d8;
 }
 
 /* Dark Theme Overrides */

@@ -40,7 +40,7 @@ const SingleTeacherPage = () => {
 
         {/* BOTTOM */}
         <div className="mt-4 bg-bg-card dark:bg-dark-card rounded-md p-4 h-[800px]">
-          <h1 className="dark:text-dark-text mb-2">Teacher&apos;s Schedule</h1>
+          <h1 className="text-text-primary dark:text-text-primary mb-2">Teacher&apos;s Schedule</h1>
           <BigCalendar />
         </div>
       </div>
@@ -68,7 +68,7 @@ const UserInfoCard = () => (
     </div>
     <div className="w-2/3 flex flex-col justify-between gap-4">
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-semibold dark:text-dark-text">Leonard Snyder</h1>
+        <h1 className="text-xl font-semibold text-text-primary dark:text-text-primary">Leonard Snyder</h1>
         {role === "admin" && (
           <FormModal
             table="teacher"
@@ -108,19 +108,11 @@ const UserInfoCard = () => (
   </div>
 );
 
-const StatCard = ({
-  icon,
-  value,
-  label,
-}: {
-  icon: string;
-  value: string;
-  label: string;
-}) => (
+const StatCard = ({ icon, value, label }: { icon: string; value: string; label: string }) => (
   <div className="bg-white dark:bg-dark-card p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:w-[45%] 2xl:w-[48%]">
     <Image src={icon} alt="" width={24} height={24} className="w-6 h-6" />
     <div>
-      <h1 className="text-xl font-semibold dark:text-dark-text">{value}</h1>
+      <h1 className="text-xl font-semibold text-text-primary dark:text-text-primary">{value}</h1>
       <span className="text-sm text-gray-400 dark:text-gray-500">{label}</span>
     </div>
   </div>
@@ -137,7 +129,7 @@ const ShortcutLinks = () => {
 
   return (
     <div className="bg-white dark:bg-dark-card p-4 rounded-md">
-      <h1 className="text-xl font-semibold dark:text-dark-text">Shortcuts</h1>
+      <h1 className="text-xl font-semibold text-text-primary dark:text-text-primary">Shortcuts</h1>
       <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500 dark:text-gray-400">
         {links.map(({ label, href, bgColor }) => (
           <Link

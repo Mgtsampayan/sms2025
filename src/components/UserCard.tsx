@@ -1,4 +1,5 @@
-// src/components/UserCard.tsx
+"use client";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { userCard } from "@/variants/userCard";
 
@@ -26,11 +27,14 @@ const badgeMap: Record<UserCardProps["type"], { bg: string; text: string }> = {
 };
 
 const UserCard = ({ type }: UserCardProps) => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   const badge = badgeMap[type];
 
   return (
     <div className={userCard({ type })}>
-      {/* Top Badge + Icon */}
       <div className="flex justify-between items-center">
         <span
           className={`text-xs font-semibold px-3 py-1 rounded-full shadow-sm tracking-wide ${badge.bg} ${badge.text}`}
@@ -40,7 +44,6 @@ const UserCard = ({ type }: UserCardProps) => {
         <Image src="/more.png" alt="options" width={20} height={20} />
       </div>
 
-      {/* Count + Label */}
       <div className="mt-6">
         <h1 className="text-3xl font-extrabold leading-none">1,234</h1>
         <h2 className="capitalize text-sm font-medium mt-1">{type}s</h2>

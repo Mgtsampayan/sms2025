@@ -63,9 +63,10 @@ const ResultListPage = () => {
   return (
     <div className="bg-bg-card dark:bg-dark-card p-4 rounded-md flex-1 m-4 mt-0">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-semibold dark:text-dark-text hidden md:block">
+        <h1 className="text-lg font-semibold dark:text-text-primary hidden md:block">
           All Results
         </h1>
+        
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">

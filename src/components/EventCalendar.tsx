@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -30,19 +30,26 @@ const events = [
 ];
 
 const EventCalendar = () => {
-  const [value, onChange] = useState<Value>(new Date());
+  const [value, onChange] = useState<Value>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    onChange(new Date()); // initialize date on client
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // prevents mismatch
 
   return (
     <div className="bg-bg-card dark:bg-dark-card rounded-lg p-6">
       <Calendar
         onChange={onChange}
         value={value}
-        className="rounded-md border border-gray-300 dark:border-gray-700"
-      // calendarType="US"
+        className="rounded-md border border-border-color"
       />
 
       <div className="flex justify-between items-center mt-8 mb-6">
-        <h1 className="text-xl font-semibold dark:text-dark-text">Events</h1>
+        <h1 className="text-xl font-semibold text-text-primary">Events</h1>
         <Image src="/moreDark.png" alt="more" width={20} height={20} />
       </div>
 
@@ -50,13 +57,13 @@ const EventCalendar = () => {
         {events.map(({ id, title, time, description }) => (
           <article
             key={id}
-            className="rounded-md border-2 border-gray-100 dark:border-gray-700 border-t-4 odd:border-t-lamaSky even:border-t-lamaPurple dark:bg-gray-800 p-5"
+            className="rounded-md border-2 border-border-color border-t-4 odd:border-t-lamaSky even:border-t-lamaPurple dark:bg-bg-secondary p-5"
           >
             <header className="flex justify-between items-center">
-              <h2 className="font-semibold text-gray-700 dark:text-gray-300">{title}</h2>
-              <time className="text-xs text-gray-400 dark:text-gray-500">{time}</time>
+              <h2 className="font-semibold text-text-primary">{title}</h2>
+              <time className="text-xs text-text-secondary">{time}</time>
             </header>
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{description}</p>
+            <p className="mt-2 text-sm text-text-secondary">{description}</p>
           </article>
         ))}
       </div>

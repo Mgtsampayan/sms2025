@@ -41,14 +41,14 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 flex flex-col gap-4">
-      <h2 className="text-lg font-semibold dark:text-dark-text">
+      <h2 className="text-lg font-semibold dark:text-text-primary"> {/* Pinalitan mula sa dark:text-dark-text */}
         {type === "create" ? "Create Class" : "Update Class"}
       </h2>
 
       <input
         type="text"
         placeholder="Class Name"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600"
+        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color para sa consistency
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
@@ -57,7 +57,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
       <input
         type="number"
         placeholder="Capacity"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600"
+        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color
         value={capacity}
         onChange={(e) => setCapacity(parseInt(e.target.value))}
         min={1}
@@ -67,7 +67,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
       <input
         type="number"
         placeholder="Grade"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600"
+        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color
         value={grade}
         onChange={(e) => setGrade(parseInt(e.target.value))}
         min={1}
@@ -78,7 +78,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
       <input
         type="text"
         placeholder="Supervisor"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600"
+        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color
         value={supervisor}
         onChange={(e) => setSupervisor(e.target.value)}
         required
@@ -86,7 +86,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
 
       <button
         type="submit"
-        className="bg-lamaYellow dark:bg-yellow-700 text-white py-2 px-4 rounded-md w-max self-end"
+        className="bg-lamaYellow dark:bg-lamaYellowDark text-white py-2 px-4 rounded-md w-max self-end" // Pinalitan sa dark:bg-lamaYellowDark, maaaring kailanganin ng review ang text-white
       >
         {type === "create" ? "Create" : "Update"}
       </button>

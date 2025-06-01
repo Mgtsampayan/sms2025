@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const announcements = [
   {
@@ -63,14 +64,18 @@ const announcements = [
 
 const Announcements = () => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  // 🛡️ Avoid SSR mismatch
+  if (!mounted) return null;
 
   return (
     <div className="bg-bg-card dark:bg-dark-card p-6 rounded-lg shadow-sm transition-colors duration-300">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-          Announcements
-        </h1>
-        <span className="text-sm text-gray-500 dark:text-gray-400 cursor-pointer hover:underline">
+        <h1 className="text-2xl font-semibold text-text-primary">Announcements</h1>
+        <span className="text-sm text-text-secondary cursor-pointer hover:underline">
           View All
         </span>
       </div>
@@ -93,19 +98,27 @@ const Announcements = () => {
           }) => (
             <div
               key={id}
-              className={`${theme === "dark" ? bgDark : bgLight} p-5 rounded-md shadow-sm transition-colors duration-300`}
+              className={`${theme === "dark" ? bgDark : bgLight
+                } p-5 rounded-md shadow-sm transition-colors duration-300`}
             >
               <div className="flex justify-between items-center mb-2">
-                <h2 className={`text-lg font-semibold ${theme === "dark" ? textDark : textLight}`}>
+                <h2
+                  className={`text-lg font-semibold ${theme === "dark" ? textDark : textLight
+                    }`}
+                >
                   {title}
                 </h2>
                 <span
-                  className={`text-xs rounded px-2 py-1 font-mono ${theme === "dark" ? dateBgDark : dateBgLight} ${theme === "dark" ? dateTextDark : dateTextLight}`}
+                  className={`text-xs rounded px-2 py-1 font-mono ${theme === "dark" ? dateBgDark : dateBgLight
+                    } ${theme === "dark" ? dateTextDark : dateTextLight}`}
                 >
                   {date}
                 </span>
               </div>
-              <p className={`text-sm opacity-90 ${theme === "dark" ? textDark : textLight}`}>
+              <p
+                className={`text-sm opacity-90 ${theme === "dark" ? textDark : textLight
+                  }`}
+              >
                 {description}
               </p>
             </div>

@@ -29,6 +29,10 @@ const ClassForm = dynamic(() => import("./forms/ClassForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 
+const ParentForm = dynamic(() => import("./forms/ParentForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+
 const forms: {
   [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
 } = {
@@ -39,6 +43,7 @@ const forms: {
   subject: (type, data) => <SubjectForm type={type} data={data} />,
   lesson: (type, data) => <LessonForm type={type} data={data} />,
   class: (type, data) => <ClassForm type={type} data={data} />,
+  parent: (type, data) => <ParentForm type={type} data={data} />,
 };
 
 const FormModal = ({
@@ -48,18 +53,18 @@ const FormModal = ({
   id,
 }: {
   table:
-    | "teacher"
-    | "student"
-    | "parent"
-    | "subject"
-    | "class"
-    | "lesson"
-    | "exam"
-    | "assignment"
-    | "result"
-    | "attendance"
-    | "event"
-    | "announcement";
+  | "teacher"
+  | "student"
+  | "parent"
+  | "subject"
+  | "class"
+  | "lesson"
+  | "exam"
+  | "assignment"
+  | "result"
+  | "attendance"
+  | "event"
+  | "announcement";
   type: "create" | "update" | "delete";
   data?: any;
   id?: number;
@@ -69,8 +74,8 @@ const FormModal = ({
     type === "create"
       ? "bg-lamaYellow"
       : type === "update"
-      ? "bg-lamaSky"
-      : "bg-lamaPurple";
+        ? "bg-lamaSky"
+        : "bg-lamaPurple";
 
   const [open, setOpen] = useState(false);
 

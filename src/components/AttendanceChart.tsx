@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import {
   BarChart,
@@ -12,81 +13,63 @@ import {
 } from "recharts";
 
 const data = [
-  {
-    name: "Mon",
-    present: 60,
-    absent: 40,
-  },
-  {
-    name: "Tue",
-    present: 70,
-    absent: 60,
-  },
-  {
-    name: "Wed",
-    present: 90,
-    absent: 75,
-  },
-  {
-    name: "Thu",
-    present: 90,
-    absent: 75,
-  },
-  {
-    name: "Fri",
-    present: 65,
-    absent: 55,
-  },
+  { name: "Mon", present: 60, absent: 40 },
+  { name: "Tue", present: 70, absent: 60 },
+  { name: "Wed", present: 90, absent: 75 },
+  { name: "Thu", present: 90, absent: 75 },
+  { name: "Fri", present: 65, absent: 55 },
 ];
 
 const AttendanceChart = () => {
   return (
-    <div className="bg-white dark:bg-dark-card rounded-lg p-4 h-full">
-      <div className="flex justify-between items-center">
-        <h1 className="text-lg font-semibold dark:text-dark-text">
+    <div className="bg-bg-card border border-border-color rounded-xl p-4 h-full shadow-sm dark:shadow-md">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-text-primary">
           Attendance
-        </h1>
-        <Image src="/moreDark.png" alt="" width={20} height={20} />
+        </h2>
+        <Image src="/moreDark.png" alt="options" width={20} height={20} />
       </div>
+
+      {/* Chart */}
       <ResponsiveContainer width="100%" height="90%">
-        <BarChart width={500} height={300} data={data} barSize={20}>
-          <CartesianGrid
-            strokeDasharray="3 3"
-            vertical={false}
-            stroke="#ddd"
-            className="dark:stroke-gray-700"
-          />
+        <BarChart data={data} barSize={20}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
           <XAxis
             dataKey="name"
             axisLine={false}
-            tick={{ fill: "#d1d5db" }}
             tickLine={false}
+            tick={{ fill: "var(--text-secondary)" }}
           />
-          <YAxis axisLine={false} tick={{ fill: "#d1d5db" }} tickLine={false} />
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            tick={{ fill: "var(--text-secondary)" }}
+          />
           <Tooltip
             contentStyle={{
-              borderRadius: "10px",
-              borderColor: "lightgray",
-              backgroundColor: "var(--tooltip-bg)",
-              color: "var(--tooltip-text)",
+              backgroundColor: "var(--bg-card)",
+              color: "var(--text-primary)",
+              borderColor: "var(--border-color)",
+              borderRadius: "0.5rem",
             }}
           />
           <Legend
             align="left"
             verticalAlign="top"
-            wrapperStyle={{ paddingTop: "20px", paddingBottom: "40px" }}
+            wrapperStyle={{ paddingTop: "16px", paddingBottom: "24px" }}
           />
           <Bar
             dataKey="present"
-            fill="#FAE27C"
-            legendType="circle"
+            fill="var(--color-lamaYellow)"
             radius={[10, 10, 0, 0]}
+            legendType="circle"
           />
           <Bar
             dataKey="absent"
-            fill="#C3EBFA"
-            legendType="circle"
+            fill="var(--color-lamaSky)"
             radius={[10, 10, 0, 0]}
+            legendType="circle"
           />
         </BarChart>
       </ResponsiveContainer>

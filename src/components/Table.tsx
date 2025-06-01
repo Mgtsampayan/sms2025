@@ -9,9 +9,9 @@ const Table = ({
   data: any[];
 }) => {
   return (
-    <table className="w-full mt-4 text-text-primary dark:text-text-primary">
+    <table className="w-full mt-4 text-text-primary">
       <thead>
-        <tr className="bg-bg-secondary dark:bg-dark-bg-secondary text-sm font-semibold text-text-secondary dark:text-text-secondary">
+        <tr className="bg-bg-secondary dark:bg-secondary text-sm font-semibold text-text-secondary">
           {columns.map((col) => (
             <th
               key={col.accessor}

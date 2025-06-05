@@ -14,6 +14,13 @@ type Parent = {
   address: string;
 };
 
+// Define reusable class strings with semantic tokens and brand colors
+const ROW_CLASS =
+  "border-b border-border-color dark:border-dark-border even:bg-bg-secondary dark:even:bg-dark-card text-sm hover:bg-lamaPurpleLight dark:hover:bg-lamaPurpleDark";
+
+const TEXT_PRIMARY = "text-text-primary dark:text-dark-text";
+const TEXT_SECONDARY = "text-text-secondary dark:text-dark-secondary";
+
 const columns = [
   {
     header: "Info",
@@ -42,25 +49,18 @@ const columns = [
 
 const ParentListPage = () => {
   const renderRow = (item: Parent) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 dark:border-dark-border even:bg-slate-50 dark:even:bg-gray-800 text-sm hover:bg-lamaPurpleLight dark:hover:bg-gray-700"
-    >
+    <tr key={item.id} className={ROW_CLASS}>
       <td className="flex items-center gap-4 p-4">
         <div className="flex flex-col">
-          <h3 className="font-semibold dark:text-dark-text">{item.name}</h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {item?.email}
-          </p>
+          <h3 className={`font-semibold ${TEXT_PRIMARY}`}>{item.name}</h3>
+          <p className={`text-xs ${TEXT_SECONDARY}`}>{item.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell dark:text-gray-300">
-        {item.students.join(",")}
+      <td className={`hidden md:table-cell ${TEXT_SECONDARY}`}>
+        {item.students.join(", ")}
       </td>
-      <td className="hidden md:table-cell dark:text-gray-300">{item.phone}</td>
-      <td className="hidden md:table-cell dark:text-gray-300">
-        {item.address}
-      </td>
+      <td className={`hidden lg:table-cell ${TEXT_SECONDARY}`}>{item.phone}</td>
+      <td className={`hidden lg:table-cell ${TEXT_SECONDARY}`}>{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
           {role === "admin" && (
@@ -75,22 +75,28 @@ const ParentListPage = () => {
   );
 
   return (
-    <div className="bg-white dark:bg-dark-card p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-bg-card dark:bg-dark-card p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold dark:text-dark-text">
+        <h1 className={`hidden md:block text-lg font-semibold ${TEXT_PRIMARY}`}>
           All Parents
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow dark:bg-yellow-700 dark:hover:bg-yellow-600">
-              <Image src="/filter.png" alt="" width={14} height={14} />
+            <button
+              aria-label="Filter"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow dark:bg-lamaYellowDark dark:hover:bg-yellow-600 transition-colors duration-200"
+            >
+              <Image src="/filter.png" alt="Filter" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow dark:bg-yellow-700 dark:hover:bg-yellow-600">
-              <Image src="/sort.png" alt="" width={14} height={14} />
+            <button
+              aria-label="Sort"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow dark:bg-lamaYellowDark dark:hover:bg-yellow-600 transition-colors duration-200"
+            >
+              <Image src="/sort.png" alt="Sort" width={14} height={14} />
             </button>
-            {role === "admin" && <FormModal table="teacher" type="create" />}
+            {role === "admin" && <FormModal table="parent" type="create" />}
           </div>
         </div>
       </div>

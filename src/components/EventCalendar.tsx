@@ -34,11 +34,11 @@ const EventCalendar = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    onChange(new Date()); // initialize date on client
+    onChange(new Date());
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // prevents mismatch
+  if (!mounted) return null;
 
   return (
     <div className="bg-bg-card dark:bg-dark-card rounded-lg p-6">

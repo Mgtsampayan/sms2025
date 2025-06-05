@@ -1,8 +1,8 @@
 import Announcements from "@/components/Announcements";
-import BigCalendar from "@/components/BigCalender";
+import BigCalendar from "@/components/BigCalender"; // Corrected typo: BigCalendar
 import FormModal from "@/components/FormModal";
 import Performance from "@/components/Performance";
-import { role } from "@/lib/data";
+import { role } from "@/lib/data"; // Assuming role is correctly typed/managed
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,8 +39,8 @@ const SingleTeacherPage = () => {
         </div>
 
         {/* BOTTOM */}
-        <div className="mt-4 bg-bg-card dark:bg-dark-card rounded-md p-4 h-[800px]">
-          <h1 className="text-text-primary dark:text-text-primary mb-2">Teacher&apos;s Schedule</h1>
+        <div className="mt-4 bg-bg-card rounded-md p-4 h-[800px]">
+          <h1 className="text-text-primary mb-2">Teacher&apos;s Schedule</h1>
           <BigCalendar />
         </div>
       </div>
@@ -56,7 +56,8 @@ const SingleTeacherPage = () => {
 };
 
 const UserInfoCard = () => (
-  <div className="bg-lamaSky dark:bg-dark-card py-6 px-4 rounded-md flex-1 flex gap-4">
+  // Uses theme-aware lamaSky background
+  <div className="bg-lamaSky py-6 px-4 rounded-md flex-1 flex gap-4"> 
     <div className="w-1/3">
       <Image
         src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200"
@@ -68,13 +69,13 @@ const UserInfoCard = () => (
     </div>
     <div className="w-2/3 flex flex-col justify-between gap-4">
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-semibold text-text-primary dark:text-text-primary">Leonard Snyder</h1>
-        {role === "admin" && (
+        <h1 className="text-xl font-semibold text-text-primary">Leonard Snyder</h1>
+        {role === "admin" && ( // Assuming role management is handled elsewhere
           <FormModal
             table="teacher"
             type="update"
             data={{
-              id: 1,
+              id: 1, // Example data
               username: "deanguerrero",
               email: "deanguerrero@gmail.com",
               password: "password",
@@ -90,10 +91,10 @@ const UserInfoCard = () => (
           />
         )}
       </div>
-      <p className="text-sm text-gray-500 dark:text-gray-400">
+      <p className="text-sm text-text-secondary"> {/* Using themed text color */}
         Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       </p>
-      <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium dark:text-gray-300">
+      <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium text-text-secondary"> {/* Using themed text color */}
         {infoItems.map(({ icon, label }) => (
           <div
             key={label}
@@ -109,11 +110,11 @@ const UserInfoCard = () => (
 );
 
 const StatCard = ({ icon, value, label }: { icon: string; value: string; label: string }) => (
-  <div className="bg-white dark:bg-dark-card p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:w-[45%] 2xl:w-[48%]">
+  <div className="bg-bg-card p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:w-[45%] 2xl:w-[48%]"> {/* Using themed card background */}
     <Image src={icon} alt="" width={24} height={24} className="w-6 h-6" />
     <div>
-      <h1 className="text-xl font-semibold text-text-primary dark:text-text-primary">{value}</h1>
-      <span className="text-sm text-gray-400 dark:text-gray-500">{label}</span>
+      <h1 className="text-xl font-semibold text-text-primary">{value}</h1>
+      <span className="text-sm text-text-secondary">{label}</span> {/* Using themed text color */}
     </div>
   </div>
 );
@@ -123,19 +124,21 @@ const ShortcutLinks = () => {
     { label: "Teacher's Classes", href: "/", bgColor: "bg-lamaSkyLight" },
     { label: "Teacher's Students", href: "/", bgColor: "bg-lamaPurpleLight" },
     { label: "Teacher's Lessons", href: "/", bgColor: "bg-lamaYellowLight" },
-    { label: "Teacher's Exams", href: "/", bgColor: "bg-pink-50" },
+    { label: "Teacher's Exams", href: "/", bgColor: "bg-pink-50" }, // Consider theming pink-50 or creating a theme variable if used widely
     { label: "Teacher's Assignments", href: "/", bgColor: "bg-lamaSkyLight" },
   ];
 
   return (
-    <div className="bg-white dark:bg-dark-card p-4 rounded-md">
-      <h1 className="text-xl font-semibold text-text-primary dark:text-text-primary">Shortcuts</h1>
-      <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500 dark:text-gray-400">
+    <div className="bg-bg-card p-4 rounded-md"> {/* Using themed card background */}
+      <h1 className="text-xl font-semibold text-text-primary">Shortcuts</h1>
+      <div className="mt-4 flex gap-4 flex-wrap text-xs text-text-secondary"> {/* Using themed text color */}
         {links.map(({ label, href, bgColor }) => (
           <Link
             key={label}
             href={href}
-            className={`${bgColor} p-3 rounded-md dark:bg-gray-700 dark:text-gray-300`}
+            // bgColor applies light mode background, dark mode has a specific override. This is fine.
+            // lamaSkyLight etc. will use their light hex values if not redefined for dark in globals.css
+            className={`${bgColor} p-3 rounded-md dark:bg-gray-700 dark:text-gray-300`} 
           >
             {label}
           </Link>

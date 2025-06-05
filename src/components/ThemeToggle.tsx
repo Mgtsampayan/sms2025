@@ -8,7 +8,7 @@ const SunIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-5 h-5 text-yellow-400"
+    className="w-5 h-5 text-yellow-400" // Specific accent color for Sun icon
     aria-hidden="true"
     focusable="false"
   >
@@ -21,7 +21,7 @@ const MoonIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-5 h-5 text-text-primary"
+    className="w-5 h-5 text-text-primary" // Themed icon color
     aria-hidden="true"
     focusable="false"
   >
@@ -33,25 +33,21 @@ export default function ThemeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Mark mounted to avoid hydration mismatch and enable UI
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    // Skeleton loader while theme loads
     return (
       <div className="w-8 h-8 bg-bg-card border border-border-color rounded-full animate-pulse" />
     );
   }
 
-  // Resolve actual theme (system or user-selected)
   const resolvedTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <button
       type="button"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      aria-label={`Switch to ${resolvedTheme === "light" ? "dark" : "light"
-        } mode`}
+      aria-label={`Switch to ${resolvedTheme === "light" ? "dark" : "light"} mode`}
       aria-pressed={resolvedTheme === "dark"}
       title={`Switch to ${resolvedTheme === "light" ? "dark" : "light"} mode`}
       className="w-8 h-8 flex items-center justify-center rounded-full bg-bg-card border border-border-color hover:bg-bg-secondary transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-lamaPurple"

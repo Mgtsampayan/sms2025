@@ -14,7 +14,10 @@ export default function ClientThemeProvider({
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  // Return null on the server to avoid rendering with the incorrect theme
+  // and prevent hydration mismatch once the client takes over.
+  if (!mounted) return null; 
+
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}

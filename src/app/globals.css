@@ -12,10 +12,10 @@
   --bg-card: #ffffff;
 
   --text-primary: #171717;
-  --text-secondary: #6b7280;
+  --text-secondary: #6b7280; /* gray-500 */
 
-  --border-color: #e5e7eb;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #e5e7eb; /* gray-200 */
+  --shadow-color: rgba(0, 0, 0, 0.07); /* Softer shadow base color */
 
   /* Brand Colors (light by default) */
   --color-lamaSky: #c3ebfa;
@@ -24,9 +24,11 @@
   --color-lamaPurpleLight: #f1f0ff;
   --color-lamaYellow: #fae27c;
   --color-lamaYellowLight: #fefce8;
-  --performance-group-a-fill: #C3EBFA;
-  --performance-group-b-fill: #FAE27C;
-  --performance-pie-fill: #8884d8;
+
+  /* Performance Chart Colors - Light Theme */
+  --performance-group-a-fill: #C3EBFA; /* lamaSky */
+  --performance-group-b-fill: #FAE27C; /* lamaYellow */
+  --performance-pie-fill: #8884d8; /* A distinct violet */
 }
 
 /* Dark Theme Overrides */
@@ -39,15 +41,24 @@
   --bg-card: #1e1e1e;
 
   --text-primary: #e0e0e0;
-  --text-secondary: #9ca3af;
+  --text-secondary: #9ca3af; /* gray-400 */
 
-  --border-color: #2a2a2a;
-  --shadow-color: rgba(255, 255, 255, 0.1);
+  --border-color: #2a2a2a; /* Darker border */
+  --shadow-color: rgba(0, 0, 0, 0.3); /* Darker shadow base for dark mode */
 
-  /* Dark Brand Color overrides (optional) */
+  /* Dark Brand Color overrides */
   --color-lamaSky: #134a60;
+  /* --color-lamaSkyLight: #0a2c3a; /* Example: if a dark variant of SkyLight is needed */
   --color-lamaPurple: #4c4b7a;
+  /* --color-lamaPurpleLight: #2a2948; /* Example: if a dark variant of PurpleLight is needed */
   --color-lamaYellow: #7a7110;
+  /* --color-lamaYellowLight: #4a440a; /* Example: if a dark variant of YellowLight is needed */
+  
+  /* Performance Chart Colors - Dark Theme */
+  --performance-group-a-fill: var(--color-lamaSky); /* Uses dark lamaSky */
+  --performance-group-b-fill: var(--color-lamaYellow); /* Uses dark lamaYellow */
+  --performance-pie-fill: #5c5a9d; /* Darker violet */
+
 
   /* React-Calendar Dark Mode */
   .react-calendar {
@@ -59,9 +70,37 @@
     background: none !important;
     color: var(--text-primary) !important;
   }
+  .react-calendar__tile:hover {
+    background-color: var(--bg-secondary) !important;
+  }
+  .react-calendar__tile:focus {
+    background-color: var(--bg-secondary) !important;
+    outline: 2px solid var(--color-lamaPurple);
+  }
+  .react-calendar__tile--active {
+    background-color: var(--color-lamaPurple) !important;
+    color: white !important; /* Ensuring contrast */
+  }
+   .react-calendar__tile--active:hover,
+   .react-calendar__tile--active:focus {
+    background-color: var(--color-lamaPurple) !important; /* Keep active color on hover/focus */
+  }
+  .react-calendar__tile--now {
+    background-color: var(--bg-secondary) !important;
+    font-weight: bold;
+  }
+  .react-calendar__tile--now:hover,
+  .react-calendar__tile--now:focus {
+    background-color: var(--bg-primary) !important; /* Slightly different hover for 'today' */
+  }
 
   .react-calendar__navigation button {
     color: var(--text-primary) !important;
+    background-color: transparent !important;
+  }
+  .react-calendar__navigation button:hover,
+  .react-calendar__navigation button:focus {
+    background-color: var(--bg-secondary) !important;
   }
 
   .react-calendar__month-view__days__day--weekend {
@@ -70,49 +109,96 @@
 
   .react-calendar__month-view__weekdays abbr {
     color: var(--text-secondary) !important;
+    text-decoration: none !important;
   }
 
   /* React-Big-Calendar Dark Mode */
-  .rbc-theme-overrides {
+  .rbc-theme-overrides { /* Wrap RBC styles in a class for specificity */
     .rbc-calendar {
       background-color: var(--bg-card) !important;
       color: var(--text-primary) !important;
     }
 
+    .rbc-toolbar button {
+      color: var(--text-primary) !important;
+    }
+    .rbc-toolbar button:hover,
+    .rbc-toolbar button:focus {
+      background-color: var(--bg-secondary) !important;
+      border-color: var(--border-color) !important;
+    }
+     .rbc-toolbar button.rbc-active,
+     .rbc-toolbar button.rbc-active:hover,
+     .rbc-toolbar button.rbc-active:focus {
+      background-color: var(--color-lamaPurple) !important;
+      border-color: var(--color-lamaPurple) !important;
+      color: white !important; /* Ensuring contrast */
+    }
+
     .rbc-header {
       background-color: var(--bg-secondary) !important;
       color: var(--text-primary) !important;
-      border-bottom-color: var(--border-color) !important;
+      border-bottom: 1px solid var(--border-color) !important;
     }
+    .rbc-header + .rbc-header { /* Add left border to subsequent headers */
+        border-left: 1px solid var(--border-color) !important;
+    }
+
 
     .rbc-day-bg {
-      background-color: var(--bg-primary) !important;
+      background-color: var(--bg-primary) !important; /* Day cell background */
+      border-left: 1px solid var(--border-color) !important;
     }
+    .rbc-day-bg:first-child {
+        border-left: none !important; /* Remove leftmost border */
+    }
+     .rbc-day-bg.rbc-today {
+      background-color: var(--bg-secondary) !important; /* Highlight for today's date */
+    }
+
 
     .rbc-time-slot {
-      border-top-color: var(--border-color) !important;
+      border-top: 1px solid var(--border-color) !important;
+    }
+    .rbc-time-gutter .rbc-time-slot { /* Time gutter slots */
+       background-color: var(--bg-secondary) !important;
     }
 
-    .rbc-time-header-content {
-      border-left-color: var(--border-color) !important;
-      border-right-color: var(--border-color) !important;
+
+    .rbc-time-header-content { /* All day events row and time column header */
+      border-left: 1px solid var(--border-color) !important;
+      border-right: 1px solid var(--border-color) !important;
+    }
+    .rbc-time-header-gutter { /* Top-left empty cell in timegrid */
+        background-color: var(--bg-card) !important;
+        border-bottom: 1px solid var(--border-color) !important;
     }
 
-    .rbc-time-header .rbc-today {
+
+    .rbc-time-header .rbc-today { /* Today's date in time header */
       background-color: var(--bg-secondary) !important;
     }
 
     .rbc-current-time-indicator {
-      background-color: var(--text-primary) !important;
+      background-color: var(--color-lamaPurple) !important; /* Accent color for current time */
+      height: 2px !important;
+    }
+    .rbc-current-time-indicator::before { /* Circle for current time indicator */
+        background-color: var(--color-lamaPurple) !important;
     }
 
     .rbc-event {
-      background-color: var(--color-lamaPurple) !important; /* Example event color */
-      color: white !important;
+      background-color: var(--color-lamaPurple) !important;
+      color: white !important; /* Ensuring contrast */
+      border: 1px solid var(--color-lamaPurple) !important;
+    }
+    .rbc-event.rbc-selected {
+        background-color: var(--color-lamaSky) !important; /* Different color for selected event */
     }
 
     .rbc-off-range-bg {
-      background-color: var(--bg-secondary) !important;
+      background-color: var(--bg-secondary) !important; /* For days outside current month view */
+      opacity: 0.5;
     }
   }
 }
@@ -120,6 +206,7 @@
 /* ========= TAILWIND DESIGN TOKENS ========= */
 
 @theme inline {
+  /* Base theme colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -132,6 +219,15 @@
 
   --color-border-color: var(--border-color);
 
+  /* Brand colors (these become available as e.g. bg-lamaSky) */
+  --color-lamaSky: var(--color-lamaSky);
+  --color-lamaSkyLight: var(--color-lamaSkyLight);
+  --color-lamaPurple: var(--color-lamaPurple);
+  --color-lamaPurpleLight: var(--color-lamaPurpleLight);
+  --color-lamaYellow: var(--color-lamaYellow);
+  --color-lamaYellowLight: var(--color-lamaYellowLight);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -139,29 +235,34 @@
 /* ========= BASE STYLES ========= */
 
 * {
-  transition: background-color 0.2s ease, color 0.2s ease,
-    border-color 0.2s ease;
+  /* Applying transitions selectively via Tailwind utilities is generally preferred */
+  /* transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; */
 }
 
 body {
-  background: var(--bg-primary);
+  background-color: var(--bg-primary); /* Use background-color for body */
   color: var(--text-primary);
   font-family: var(--font-sans), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; /* Add antialiasing for better text rendering */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ========= SCROLLBAR STYLE ========= */
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px; /* For horizontal scrollbars */
 }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-secondary);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 4px;
+  border: 2px solid var(--bg-secondary); /* Creates padding around thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {

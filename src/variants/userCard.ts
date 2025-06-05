@@ -1,21 +1,13 @@
-// src/variants/userCard.ts
 import { tv } from "tailwind-variants";
 
 export const userCard = tv({
-    base: "rounded-xl p-6 flex-1 min-w-[140px] flex flex-col justify-between transition-colors duration-300 shadow-sm dark:shadow-md border",
+    base: "rounded-xl p-4 md:p-6 flex-1 min-w-[180px] sm:min-w-[200px] flex flex-col justify-between transition-colors duration-300 shadow-soft hover:shadow-medium border border-border-color",
     variants: {
         type: {
-            student:
-                "bg-green-50 dark:bg-green-900 border-green-200 dark:border-green-700 text-green-900 dark:text-green-300",
-            teacher:
-                "bg-purple-50 dark:bg-purple-900 border-purple-200 dark:border-purple-700 text-purple-900 dark:text-purple-300",
-            parent:
-                "bg-yellow-50 dark:bg-yellow-900 border-yellow-200 dark:border-yellow-700 text-yellow-900 dark:text-yellow-300",
-            staff:
-                "bg-blue-50 dark:bg-blue-900 border-blue-200 dark:border-blue-700 text-blue-900 dark:text-blue-300",
+            student: "bg-green-50 dark:bg-bg-card text-green-700 dark:text-text-secondary",
+            teacher: "bg-lamaPurpleLight dark:bg-lamaPurpleDark text-purple-700 dark:text-lamaPurple",
+            parent: "bg-lamaYellowLight dark:bg-lamaYellowDark text-yellow-700 dark:text-lamaYellow",
+            staff: "bg-lamaSkyLight dark:bg-lamaSkyDark text-sky-700 dark:text-lamaSky",
         },
-    },
-    defaultVariants: {
-        type: "student",
     },
 });

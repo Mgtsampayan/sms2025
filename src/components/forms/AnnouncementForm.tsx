@@ -21,7 +21,7 @@ const AnnouncementForm = ({ type, data }: AnnouncementFormProps) => {
     e.preventDefault();
 
     const payload = {
-      id: data?.id || Date.now(), // fallback ID for mock
+      id: data?.id || Date.now(),
       title,
       message,
       date,

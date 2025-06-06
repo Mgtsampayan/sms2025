@@ -26,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Early theme detection script to prevent FOUC */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

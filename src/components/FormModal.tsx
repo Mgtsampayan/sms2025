@@ -7,31 +7,14 @@ import { useState, useEffect } from "react";
 import { JSX } from "react/jsx-runtime";
 
 // Lazy loaded forms
-const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const StudentForm = dynamic(() => import("./forms/StudentForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const EventForm = dynamic(() => import("./forms/EventForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const LessonForm = dynamic(() => import("./forms/LessonForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const ClassForm = dynamic(() => import("./forms/ClassForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-
-const ParentForm = dynamic(() => import("./forms/ParentForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
+const TeacherForm = dynamic(() => import("./forms/TeacherForm"), { loading: () => <h1>Loading...</h1> });
+const StudentForm = dynamic(() => import("./forms/StudentForm"), { loading: () => <h1>Loading...</h1> });
+const EventForm = dynamic(() => import("./forms/EventForm"), { loading: () => <h1>Loading...</h1> });
+const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), { loading: () => <h1>Loading...</h1> });
+const SubjectForm = dynamic(() => import("./forms/SubjectForm"), { loading: () => <h1>Loading...</h1> });
+const LessonForm = dynamic(() => import("./forms/LessonForm"), { loading: () => <h1>Loading...</h1> });
+const ClassForm = dynamic(() => import("./forms/ClassForm"), { loading: () => <h1>Loading...</h1> });
+const ParentForm = dynamic(() => import("./forms/ParentForm"), { loading: () => <h1>Loading...</h1> });
 
 const forms: {
   [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
@@ -128,12 +111,15 @@ const FormModal = ({
         aria-expanded={open}
         aria-label={`${type} ${table} form`}
       >
-        <Image
-          src={`/${type}.png`}
-          alt={`${type} icon`}
-          width={16}
-          height={16}
-        />
+        <div className="relative w-4 h-4">
+          <Image
+            src={`/${type}.png`}
+            alt={`${type} icon`}
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="100%"
+          />
+        </div>
       </button>
 
       {open && (
@@ -142,11 +128,11 @@ const FormModal = ({
           aria-modal="true"
           role="dialog"
           tabIndex={-1}
-          onClick={() => setOpen(false)} // close modal on overlay click
+          onClick={() => setOpen(false)}
         >
           <div
             className="bg-white dark:bg-dark-card p-4 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] shadow-lg max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()} // prevent closing modal on content click
+            onClick={(e) => e.stopPropagation()}
           >
             <Form />
             <button

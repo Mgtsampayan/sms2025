@@ -13,6 +13,12 @@ type ClassFormProps = {
   };
 };
 
+// Consistent styling classes aligned with your theme
+const INPUT_CLASS = "p-2 border border-border-color dark:border-dark-border rounded-md bg-bg-card dark:bg-dark-card text-text-primary dark:text-dark-text placeholder:text-text-secondary dark:placeholder:text-dark-secondary focus:outline-none focus:ring-2 focus:ring-lamaPurple dark:focus:ring-lamaPurpleDark";
+const BUTTON_CLASS = "bg-lamaYellow dark:bg-lamaYellowDark hover:bg-yellow-500 dark:hover:bg-yellow-600 text-white py-2 px-4 rounded-md w-max self-end transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400";
+const TITLE_CLASS = "text-lg font-semibold text-text-primary dark:text-dark-text";
+const FORM_CLASS = "p-4 flex flex-col gap-4 bg-bg-card dark:bg-dark-card";
+
 const ClassForm = ({ type, data }: ClassFormProps) => {
   const [name, setName] = useState(data?.name || "");
   const [capacity, setCapacity] = useState(data?.capacity || 0);
@@ -40,15 +46,15 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 flex flex-col gap-4">
-      <h2 className="text-lg font-semibold dark:text-text-primary"> {/* Pinalitan mula sa dark:text-dark-text */}
+    <form onSubmit={handleSubmit} className={FORM_CLASS}>
+      <h2 className={TITLE_CLASS}>
         {type === "create" ? "Create Class" : "Update Class"}
       </h2>
 
       <input
         type="text"
         placeholder="Class Name"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color para sa consistency
+        className={INPUT_CLASS}
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
@@ -57,7 +63,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
       <input
         type="number"
         placeholder="Capacity"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color
+        className={INPUT_CLASS}
         value={capacity}
         onChange={(e) => setCapacity(parseInt(e.target.value))}
         min={1}
@@ -67,7 +73,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
       <input
         type="number"
         placeholder="Grade"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color
+        className={INPUT_CLASS}
         value={grade}
         onChange={(e) => setGrade(parseInt(e.target.value))}
         min={1}
@@ -78,7 +84,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
       <input
         type="text"
         placeholder="Supervisor"
-        className="p-2 border rounded-md dark:bg-dark-card dark:border-gray-600" // ang dark:border-gray-600 ay maaaring dark:border-border-color
+        className={INPUT_CLASS}
         value={supervisor}
         onChange={(e) => setSupervisor(e.target.value)}
         required
@@ -86,7 +92,7 @@ const ClassForm = ({ type, data }: ClassFormProps) => {
 
       <button
         type="submit"
-        className="bg-lamaYellow dark:bg-lamaYellowDark text-white py-2 px-4 rounded-md w-max self-end" // Pinalitan sa dark:bg-lamaYellowDark, maaaring kailanganin ng review ang text-white
+        className={BUTTON_CLASS}
       >
         {type === "create" ? "Create" : "Update"}
       </button>

@@ -1,81 +1,122 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import InputField from "../InputField";
+import { subjectSchema, SubjectSchema } from "@/lib/formValidationSchemas";
+// import { createSubject, updateSubject } from "@/lib/actions";
+import { useFormState } from "react-dom";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
-type SubjectFormProps = {
+const SubjectForm = ({
+  type,
+  data,
+  setOpen,
+  relatedData,
+}: {
   type: "create" | "update";
-  data?: {
-    id?: number;
-    name?: string;
-    code?: string;
-    description?: string;
-  };
-};
+  data?: any;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  relatedData?: any;
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SubjectSchema>({
+    resolver: zodResolver(subjectSchema),
+  });
 
-// Consistent styling classes aligned with your theme
-const INPUT_CLASS = "p-2 border border-border-color dark:border-dark-border rounded-md bg-bg-card dark:bg-dark-card text-text-primary dark:text-dark-text placeholder:text-text-secondary dark:placeholder:text-dark-secondary focus:outline-none focus:ring-2 focus:ring-lamaPurple dark:focus:ring-lamaPurpleDark";
-const TEXTAREA_CLASS = "p-2 border border-border-color dark:border-dark-border rounded-md bg-bg-card dark:bg-dark-card text-text-primary dark:text-dark-text placeholder:text-text-secondary dark:placeholder:text-dark-secondary focus:outline-none focus:ring-2 focus:ring-lamaPurple dark:focus:ring-lamaPurpleDark resize-none";
-const BUTTON_CLASS = "bg-lamaYellow dark:bg-lamaYellowDark hover:bg-yellow-500 dark:hover:bg-yellow-600 text-white py-2 px-4 rounded-md w-max self-end transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400";
-const TITLE_CLASS = "text-lg font-semibold text-text-primary dark:text-dark-text";
-const FORM_CLASS = "p-4 flex flex-col gap-4 bg-bg-card dark:bg-dark-card";
-
-const SubjectForm = ({ type, data }: SubjectFormProps) => {
-  const [name, setName] = useState(data?.name || "");
-  const [code, setCode] = useState(data?.code || "");
-  const [description, setDescription] = useState(data?.description || "");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const payload = {
-      id: data?.id || Date.now(),
-      name,
-      code,
-      description,
-    };
-
-    if (type === "create") {
-      console.log("Creating subject:", payload);
-    } else {
-      console.log("Updating subject:", payload);
+  const [state, formAction] = useFormState(
+    type === "create" ? createSubject : updateSubject,
+    {
+      success: false,
+      error: false,
     }
-  };
+  );
+
+  const onSubmit = handleSubmit((data) => {
+    formAction(data);
+  });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      toast(`Subject has been ${type === "create" ? "created" : "updated"}!`);
+      setOpen(false);
+      router.refresh();
+    }
+  }, [state, router, type, setOpen]);
+
+  const { teachers } = relatedData;
 
   return (
-    <form onSubmit={handleSubmit} className={FORM_CLASS}>
-      <h2 className={TITLE_CLASS}>
-        {type === "create" ? "Create Subject" : "Update Subject"}
-      </h2>
+    <form
+      className="p-6 flex flex-col gap-6 bg-white dark:bg-dark-card rounded-md shadow-md"
+      onSubmit={onSubmit}
+    >
+      <h1 className="text-xl font-semibold text-text-primary dark:text-dark-text">
+        {type === "create" ? "Create a new subject" : "Update the subject"}
+      </h1>
 
-      <input
-        type="text"
-        placeholder="Subject Name"
-        className={INPUT_CLASS}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+      <div className="flex justify-between flex-wrap gap-4">
+        <InputField
+          label="Subject name"
+          name="name"
+          defaultValue={data?.name}
+          register={register}
+          error={errors?.name}
+        // className="w-full md:w-1/2"
+        />
 
-      <input
-        type="text"
-        placeholder="Subject Code"
-        className={INPUT_CLASS}
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        required
-      />
+        {data && (
+          <InputField
+            label="Id"
+            name="id"
+            defaultValue={data?.id}
+            register={register}
+            error={errors?.id}
+          // hidden
+          />
+        )}
 
-      <textarea
-        placeholder="Description"
-        className={TEXTAREA_CLASS}
-        rows={4}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500 dark:text-gray-400">
+            Teachers
+          </label>
+          <select
+            multiple
+            className="p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-card text-sm text-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-lamaPurple dark:focus:ring-lamaPurpleDark"
+            {...register("teachers")}
+            defaultValue={data?.teachers}
+          >
+            {teachers.map(
+              (teacher: { id: string; name: string; surname: string }) => (
+                <option value={teacher.id} key={teacher.id}>
+                  {teacher.name + " " + teacher.surname}
+                </option>
+              )
+            )}
+          </select>
+          {errors.teachers?.message && (
+            <p className="text-xs text-red-400">
+              {errors.teachers.message.toString()}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {state.error && (
+        <span className="text-red-500">Something went wrong!</span>
+      )}
 
       <button
         type="submit"
-        className={BUTTON_CLASS}
+        className="bg-lamaYellow dark:bg-lamaYellowDark hover:bg-yellow-500 dark:hover:bg-yellow-600 text-white py-2 px-4 rounded-md self-end transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
       >
         {type === "create" ? "Create" : "Update"}
       </button>
